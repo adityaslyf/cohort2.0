@@ -10,7 +10,7 @@ function printResult(data) {
 
 const result = sum(1, 2, printResult);
 
-//setout function
+//setTimeout function
 
 function greet() {
   console.log("Hello");
@@ -60,18 +60,41 @@ console.log(a); // this print after Hello as it is syncronous and after that dat
 //use latentflip website to see the difference between syncronous and asyncronous and see your code in action, section like call stack, event loop, callback queue, web api, heap, etc.
 */
 
-const fs = require("fs");
+//creating own asyncronous function
+// const fs = require("fs");
+// function adityareadFile(cb) {
+//   fs.readFile("a.txt", "utf8", (err, data) => {
+//     cb(data);
+//   });
+// }
 
-fs.readFile("a.txt", "utf8", (err, data) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log(data);
-  }
-});
-console.log("Hello");
-let a = 0;
-for (let i = 0; i < 1000000000; i++) {
-  a++;
+// //callback function to call
+// function onDone(data) {  // onDone is a callback function which is called by adityareadFile function and data is passed to it as a parameter which is printed by console.log in onDone function 
+//   console.log(data);
+// }
+// adityareadFile(onDone);
+
+
+
+// Promises
+
+const fs = require("fs");
+function aditysreadFile(){
+  return new Promise(function(resolve) {
+    console.log("Promise started");
+    fs.readFile("a.txt", "utf8", (err, data) => {
+      console.log("Promise done");
+      resolve(data);
+    });
+  });
 }
-console.log(a);
+
+
+//callback function to call
+async function onDone(data) { 
+  let result = await data; // onDone is a callback function which is called by adityareadFile function and data is passed to it as a parameter which is printed by console.log in onDone function 
+  console.log(result);
+}
+
+  var a = aditysreadFile();
+  a.then(onDone);
