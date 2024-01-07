@@ -98,3 +98,12 @@ async function onDone(data) {
 
   var a = aditysreadFile();
   a.then(onDone);
+//promises by akshay saini
+  const Github_Api = "https://api.github.com/users/adityaslyf";
+const user = fetch("https://api.github.com/users/adityaslyf")
+
+console.log(user)
+
+user.then((data) => { 
+console.log(data) 
+})
